@@ -49,6 +49,7 @@ dependencies {
 
     implementation (libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.navigation.compose)
+    implementation(libs.kotlinx.coroutines.play.services)
 
 
     implementation (libs.play.services.location) // or the latest version

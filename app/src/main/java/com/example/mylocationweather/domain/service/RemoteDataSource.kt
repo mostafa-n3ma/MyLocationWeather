@@ -4,5 +4,5 @@ import com.example.mylocationweather.domain.model.LocationInfo
 import com.example.mylocationweather.domain.model.WeatherInfo
 
 interface RemoteDataSource {
-    fun getCurrentLocationWeatherInfo(location: LocationInfo): WeatherInfo
+    suspend fun getCurrentLocationWeatherInfo(location: LocationInfo): WeatherInfo
 }
