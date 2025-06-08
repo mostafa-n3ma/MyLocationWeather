@@ -1,7 +1,10 @@
+import org.gradle.kotlin.dsl.implementation
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    id("org.jetbrains.kotlin.plugin.serialization") version "2.0.21"
 }
 
 android {
@@ -53,6 +56,14 @@ dependencies {
 
 
     implementation (libs.play.services.location) // or the latest version
+
+
+    implementation (libs.ktor.client.core  )       // Core Ktor client
+    implementation (libs.ktor.client.cio   )       // CIO engine
+    implementation( libs.ktor.client.content.negotiation )// Content negotiation (for JSON)
+    implementation( libs.ktor.serialization.kotlinx.json) // Kotlinx JSON serializer
+
+
 
 
     implementation(libs.androidx.core.ktx)

@@ -1,14 +1,13 @@
 package com.example.mylocationweather.domain.usecase
 
-import android.location.Location
 import com.example.mylocationweather.domain.model.LocationInfo
-import com.example.mylocationweather.domain.model.WeatherInfo
-import com.example.mylocationweather.domain.service.RemoteDataSource
+import com.example.mylocationweather.domain.model.WeatherEntity
+import com.example.mylocationweather.domain.repository.WeatherRepository
 
 class GetWeatherUseCase(
-    private val remoteDataSource: RemoteDataSource
+    private val weatherRepository: WeatherRepository
 ) {
-    fun getWeatherInfo(location: LocationInfo): WeatherInfo {
-        return remoteDataSource.getCurrentLocationWeatherInfo(location)
+    suspend fun getWeatherInfo(location: LocationInfo): WeatherEntity {
+        return weatherRepository.getCurrentLocationWeatherInfo(location)
     }
 }

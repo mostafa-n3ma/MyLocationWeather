@@ -2,9 +2,12 @@ package com.example.mylocationweather.data.repository
 
 import com.example.mylocationweather.domain.model.LocationInfo
 import com.example.mylocationweather.domain.repository.LocationRepository
+import com.example.mylocationweather.domain.service.LocationService
 
-class LocationRepositoryImpl: LocationRepository {
-    override fun getCurrentLocation(): LocationInfo {
-        TODO("Not yet implemented")
+class LocationRepositoryImpl(
+    private val locationService: LocationService
+): LocationRepository {
+    override suspend fun getCurrentLocation(): LocationInfo {
+        return locationService.getCurrentLocation()
     }
 }
