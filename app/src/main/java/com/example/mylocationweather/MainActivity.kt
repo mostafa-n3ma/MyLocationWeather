@@ -28,7 +28,7 @@ class MainActivity : ComponentActivity() {
 
         viewModel = getViewModel()
 
-        // Register permission launcher once
+
         val permissionLauncher = registerForActivityResult(
             ActivityResultContracts.RequestPermission()
         ) { granted ->
@@ -39,7 +39,7 @@ class MainActivity : ComponentActivity() {
             }
         }
 
-        // Initialize PermissionManager
+
         permissionManager = PermissionManager(
             context = this,
             permission = Manifest.permission.ACCESS_FINE_LOCATION,
@@ -49,7 +49,7 @@ class MainActivity : ComponentActivity() {
             }
         )
 
-        // Request permission
+
         permissionManager.requestLocationPermission()
 
         setContent {
