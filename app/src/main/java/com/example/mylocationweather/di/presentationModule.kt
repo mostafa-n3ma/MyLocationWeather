@@ -1,12 +1,12 @@
 package com.example.mylocationweather.di
 
+import com.example.mylocationweather.presentation.viewModel.HomeViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
-import com.example.mylocationweather.pressentation.viewModel.HomeViewMode
 import org.koin.dsl.module
 
 val PresentationModule = module {
     viewModel {
-        HomeViewMode(
+        HomeViewModel(
             getCurrentLocationUseCase = get(),
             getWeatherUseCase = get()
             )

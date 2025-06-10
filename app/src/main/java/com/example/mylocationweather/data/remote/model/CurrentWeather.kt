@@ -9,5 +9,6 @@ data class CurrentWeather(
     val temperature: Double,           // °C
     @SerialName("windspeed") val windSpeed: Double,   // km/h
     @SerialName("weathercode") val weatherCode: Int,
-    @SerialName("time") val time: String               // ISO timestamp
+    @SerialName("time") val time: String ,// ISO timestamp
+    @SerialName("is_day") val isDay: Int
 )
