@@ -37,7 +37,6 @@ val CityTextDayColor = Color(0xFF323232)
 val CityTextNightColor = Color(0xFFFFFFFF)
 
 
-val holder = Color(0xFF87CEFA)
 
 //AnimatedHeader
 val TempDayTextColor = Color(0xFF060414)

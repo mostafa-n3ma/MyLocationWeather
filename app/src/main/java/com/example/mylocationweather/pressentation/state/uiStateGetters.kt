@@ -1,6 +1,6 @@
 package com.example.mylocationweather.pressentation.state
 
-import com.example.mylocationweather.domain.model.LocationInfo
+import com.example.mylocationweather.data.remote.model.LocationInfo
 import com.example.mylocationweather.domain.model.WeatherEntity
 import com.example.mylocationweather.pressentation.ui.components.AnimatedHeaderUiState
 import com.example.mylocationweather.pressentation.ui.components.NextDaysItemUiState
@@ -9,7 +9,7 @@ import com.example.mylocationweather.pressentation.utils.getCondition
 import com.example.mylocationweather.ui.theme.DisplayMode
 
 
-fun getHomeUiState(locationInfo: LocationInfo,weatherEntity: WeatherEntity): HomeUiState{
+fun getHomeUiState(weatherEntity: WeatherEntity): HomeUiState{
     return HomeUiState(
         displayMode = when(weatherEntity.isDay){
             "1"-> {
@@ -22,7 +22,7 @@ fun getHomeUiState(locationInfo: LocationInfo,weatherEntity: WeatherEntity): Hom
                 DisplayMode.Day
             }
         },
-        cityName = locationInfo.cityName,
+        cityName = weatherEntity.cityName,
         headerUiState = AnimatedHeaderUiState(
             weatherCondition = getCondition(weatherEntity.currentWeatherCode),
             temp = weatherEntity.currentTemperature.toString(),

@@ -1,8 +1,7 @@
-package com.example.mylocationweather.pressentation.ui
+package com.example.mylocationweather.pressentation.ui.screens.mainScreen
 
 import android.util.Log
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -32,9 +31,23 @@ import com.example.mylocationweather.pressentation.ui.components.CitNameComponen
 import com.example.mylocationweather.pressentation.ui.components.NextSevenDaysSection
 import com.example.mylocationweather.pressentation.ui.components.TodaySection
 import com.example.mylocationweather.pressentation.ui.components.WeatherDetailItem
+import com.example.mylocationweather.pressentation.utils.GetScreenSizeDp
 import com.example.mylocationweather.ui.theme.DisplayMode
 import com.example.mylocationweather.ui.theme.MainBackgroundDayLinearGradient
 import com.example.mylocationweather.ui.theme.MainBackgroundNightLinearGradient
+
+fun calculateProgress(offset: Int, screenHeight: Int): Float {
+    val expandThreshold = (screenHeight * 0.066f).toInt() // ~6.6% of height (~50px on 759 height)
+    val collapseThreshold = (screenHeight * -0.066f).toInt() // -6.6% of height (~-50px)
+    val range = expandThreshold - collapseThreshold
+
+    return when {
+        offset >= expandThreshold -> 1f
+        offset <= collapseThreshold -> 0f
+        else -> 1f - (expandThreshold - offset).toFloat() / range
+    }
+}
+
 
 @Composable
 fun HomeScreenContent(
@@ -44,28 +57,31 @@ fun HomeScreenContent(
 ) {
     val displayMode = homeUiState.displayMode
 
+    val screenSize: Pair<Int, Int> = GetScreenSizeDp()
 
 
     val listState = rememberLazyListState()
-    var isHeaderExpanded by remember { mutableStateOf(true) }
-    var previousOffset by remember { mutableStateOf(0) }
-
+    var progress by remember { mutableStateOf(1f) }
 
 
 
     LaunchedEffect(listState) {
-        snapshotFlow { listState.firstVisibleItemScrollOffset }
-            .collect { currentOffset ->
-                Log.d("LazyShit", "HomeScreenContent: $currentOffset")
-//                isHeaderExpanded = when {
-//                    currentOffset == 0 -> true
-//                    currentOffset < previousOffset -> true   // Scroll down → expand
-//                    currentOffset > previousOffset -> false  // Scroll up → collapse
-//                    else -> isHeaderExpanded
-//                }
-//                previousOffset = currentOffset
+        snapshotFlow {
+            // Get the visible items info
+            val visibleItems = listState.layoutInfo.visibleItemsInfo
+            // Find our specific item by key
+            visibleItems.firstOrNull { it.key == "ItemTracker" }?.offset
+        }.collect { itemOffset ->
+            itemOffset?.let { offset ->
+                Log.d("ItemTracker", " offset: $offset : screenSize:$screenSize")
+                progress = calculateProgress(offset,screenSize.second)
+            } ?: run {
+                // Item is not currently visible
+                progress = if (listState.firstVisibleItemIndex > 0) 0f else 1f
             }
+        }
     }
+
 
 
 
@@ -82,17 +98,6 @@ fun HomeScreenContent(
         ,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Spacer(Modifier.height(24.dp))
-        CitNameComponent(
-            modifier = Modifier.clickable{
-                isHeaderExpanded = !isHeaderExpanded
-            },
-            displayMode = displayMode,
-            cityName = homeUiState.cityName
-        )
-        Spacer(Modifier.height(12.dp))
-
-
         LazyColumn(
             state = listState,
             modifier = Modifier,
@@ -100,12 +105,18 @@ fun HomeScreenContent(
             verticalArrangement = Arrangement.spacedBy(24.dp),
             contentPadding = PaddingValues(vertical = 24.dp)
         ){
-
             item {
-                // TODO: AnimatedHeaderUiState to state
+                CitNameComponent(
+                    displayMode = displayMode,
+                    cityName = homeUiState.cityName
+                )
+                Spacer(Modifier.height(12.dp))
+            }
+
+            item (key = "ItemTracker"){
                 AnimatedHeader(
                     displayMode = displayMode,
-                    isExpanded = isHeaderExpanded,
+                    progress = progress,
                     state = homeUiState.headerUiState,
                 )
             }
@@ -145,7 +156,7 @@ fun HomeScreenContent(
                                 DisplayMode.Day -> painterResource(R.drawable.icon_rain)
                                 DisplayMode.Night -> painterResource(R.drawable.icon_rain_night)
                             },
-                            mainText = "${homeUiState.rain.take(2)}%",
+                            mainText = "${homeUiState.rain}%",
                             subText = "Rain"
                         )
                     }
@@ -170,7 +181,7 @@ fun HomeScreenContent(
                                 DisplayMode.Day -> painterResource(R.drawable.icon_arrow_down_05)
                                 DisplayMode.Night -> painterResource(R.drawable.icon_arrow_down_05_night)
                             },
-                            mainText = "${homeUiState.pressure.take(3)} hPa",
+                            mainText = "${homeUiState.pressure} hPa",
                             subText = "Pressure"
                         )
                         WeatherDetailItem(
@@ -180,7 +191,7 @@ fun HomeScreenContent(
                                 DisplayMode.Day -> painterResource(R.drawable.icon_temperature)
                                 DisplayMode.Night -> painterResource(R.drawable.icon_temperature_night)
                             },
-                            mainText = "${homeUiState.feelsLike.take(2)}°C",
+                            mainText = "${homeUiState.feelsLike}°C",
                             subText = "Feels like"
                         )
                     }
@@ -202,12 +213,6 @@ fun HomeScreenContent(
 
 
         }
-
-
-
-
-
-
 
     }
 }

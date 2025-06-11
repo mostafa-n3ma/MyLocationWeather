@@ -1,4 +1,4 @@
-package com.example.mylocationweather.domain.model
+package com.example.mylocationweather.data.remote.model
 
 data class LocationInfo(
     var latitude: Double,

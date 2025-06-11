@@ -7,9 +7,10 @@ import android.location.Geocoder
 import androidx.annotation.RequiresPermission
 import com.example.mylocationweather.data.LocationFailureException
 import com.example.mylocationweather.data.LocationNullException
-import com.example.mylocationweather.domain.model.LocationInfo
+import com.example.mylocationweather.data.remote.model.LocationInfo
 import com.example.mylocationweather.domain.service.LocationService
 import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.Priority
 import kotlinx.coroutines.tasks.await
 import java.util.Locale
 
@@ -21,13 +22,15 @@ class LocationServiceImpl(
     @RequiresPermission(allOf = [Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION])
     override suspend fun getCurrentLocation(): LocationInfo {
         return try {
-            val location = fusedLocationProviderClient.lastLocation.await()
+            val location = fusedLocationProviderClient
+                .getCurrentLocation(Priority.PRIORITY_HIGH_ACCURACY, null)
+                .await()
             location?.let {
                 val cityName = getCityNameFromLatLng(it.latitude, it.longitude)
                 LocationInfo(latitude = it.latitude, longitude = it.longitude, cityName = cityName)
             } ?: throw LocationNullException()
         } catch (e: Exception) {
-            throw LocationFailureException(e.message.toString())
+            throw LocationFailureException(e.message.orEmpty())
         }
     }
 

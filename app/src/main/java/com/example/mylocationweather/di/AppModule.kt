@@ -5,6 +5,5 @@ import com.example.mylocationweather.domain.usecase.GetWeatherUseCase
 import org.koin.dsl.module
 
 val AppModule = module {
-    single { GetCurrentLocationUseCase(locationRepository = get()) }
-    single { GetWeatherUseCase(weatherRepository = get()) }
+    single { GetWeatherUseCase(weatherRepository = get(), locationRepository = get()) }
 }

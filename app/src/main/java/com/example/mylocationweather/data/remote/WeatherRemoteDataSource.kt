@@ -1,7 +1,7 @@
 package com.example.mylocationweather.data.remote
 
-import com.example.mylocationweather.data.remote.model.WeatherDto
-import com.example.mylocationweather.domain.model.LocationInfo
+import com.example.mylocationweather.data.remote.model.weatherModel.WeatherDto
+import com.example.mylocationweather.data.remote.model.LocationInfo
 import com.example.mylocationweather.domain.service.RemoteDataSource
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body

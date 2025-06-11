@@ -14,11 +14,13 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -29,6 +31,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.mylocationweather.R
 import com.example.mylocationweather.pressentation.utils.WeatherCondition
+import com.example.mylocationweather.pressentation.utils.dropShadow
 import com.example.mylocationweather.pressentation.utils.getCondition
 import com.example.mylocationweather.pressentation.utils.getConditionResourceId
 import com.example.mylocationweather.ui.theme.DailyItemDayText
@@ -160,44 +163,42 @@ fun NextSevenDaysSectionP(modifier: Modifier = Modifier) {
         NextDaysItemUiState(
             dayName = "Monday",
             conditionCode = WeatherCondition.MAINLY_CLEAR.code,
-            highTemp = "35C",
-            lowTemp = "25C"
+            highTemp = "35",
+            lowTemp = "25"
         ),
         NextDaysItemUiState(
             dayName = "Monday",
             conditionCode = WeatherCondition.MAINLY_CLEAR.code,
-            highTemp = "35C",
-            lowTemp = "25C"
-        ), NextDaysItemUiState(
+            highTemp = "35",
+            lowTemp = "25"
+        ),NextDaysItemUiState(
             dayName = "Monday",
             conditionCode = WeatherCondition.MAINLY_CLEAR.code,
-            highTemp = "35C",
-            lowTemp = "25C"
+            highTemp = "35",
+            lowTemp = "25"
         ),
         NextDaysItemUiState(
             dayName = "Monday",
             conditionCode = WeatherCondition.MAINLY_CLEAR.code,
-            highTemp = "35C",
-            lowTemp = "25C"
-        ),
-        NextDaysItemUiState(
+            highTemp = "35",
+            lowTemp = "25"
+        ),NextDaysItemUiState(
             dayName = "Monday",
             conditionCode = WeatherCondition.MAINLY_CLEAR.code,
-            highTemp = "35C",
-            lowTemp = "25C"
-        ),
-        NextDaysItemUiState(
+            highTemp = "35",
+            lowTemp = "25"
+        ),NextDaysItemUiState(
             dayName = "Monday",
             conditionCode = WeatherCondition.MAINLY_CLEAR.code,
-            highTemp = "35C",
-            lowTemp = "25C"
-        ),
-        NextDaysItemUiState(
+            highTemp = "35",
+            lowTemp = "25"
+        ),NextDaysItemUiState(
             dayName = "Monday",
             conditionCode = WeatherCondition.MAINLY_CLEAR.code,
-            highTemp = "35C",
-            lowTemp = "25C"
-        )
+            highTemp = "35",
+            lowTemp = "25"
+        ),
+
     )
     Column(
         modifier = Modifier
@@ -242,20 +243,36 @@ fun DailyItem(
             )
         )
 
-        Row(
+        Box(
             modifier = Modifier
                 .align(Alignment.Center)
                 .size(91.dp, 45.dp)
                 .padding(vertical = 6.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Center
+           contentAlignment = Alignment.Center
         ) {
-            Image(
-                painter = painter,
-                contentDescription = null,
-                contentScale = ContentScale.Inside
+            Box(
+                modifier = Modifier
+                    .size(15.dp)
+                    .dropShadow(
+                        shape = CircleShape,
+                        color = when(displayMode){
+                            DisplayMode.Day -> Color(0xFF000000)
+                            DisplayMode.Night -> Color(0xFF7A6FB0)
+                        },
+                        blur = 50.dp,
+                        spread = 1.dp
+                    )
+
+                ,
             )
-        }
+
+                Image(
+                    painter = painter,
+                    contentDescription = null,
+                    contentScale = ContentScale.Inside
+                )
+            }
+
 
         Row(
             modifier = Modifier.align(Alignment.CenterEnd),
@@ -273,7 +290,7 @@ fun DailyItem(
                     contentDescription = null
                 )
                 Text(
-                    text = highTemp,
+                    text = "$highTemp°C",
                     style = TextStyle(
                         fontFamily = UrbanistFont,
                         fontSize = 16.sp,
@@ -314,7 +331,7 @@ fun DailyItem(
                     contentDescription = null
                 )
                 Text(
-                    text = lowTemp,
+                    text = "$lowTemp°C",
                     style = TextStyle(
                         fontFamily = UrbanistFont,
                         fontSize = 16.sp,
@@ -342,8 +359,8 @@ fun DailyItemP(modifier: Modifier = Modifier) {
     val day = NextDaysItemUiState(
         dayName = "Monday",
         conditionCode = WeatherCondition.MAINLY_CLEAR.code,
-        highTemp = "35C",
-        lowTemp = "25C"
+        highTemp = "35",
+        lowTemp = "25"
     )
 
     DailyItem(

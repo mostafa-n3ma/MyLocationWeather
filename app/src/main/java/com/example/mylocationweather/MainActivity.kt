@@ -15,7 +15,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import com.example.mylocationweather.presentation.viewModel.HomeViewModel
 import com.example.mylocationweather.pressentation.permisions.PermissionManager
-import com.example.mylocationweather.pressentation.ui.HomeScreen
+import com.example.mylocationweather.pressentation.ui.screens.mainScreen.HomeScreen
 import com.example.mylocationweather.ui.theme.MyLocationWeatherTheme
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
@@ -36,7 +36,7 @@ class MainActivity : ComponentActivity() {
             ActivityResultContracts.RequestPermission()
         ) { granted ->
             if (granted) {
-                viewModel.getCurrentLocation()
+                viewModel.getCurrentWeather()
             } else {
                 Toast.makeText(this, "Location permission denied", Toast.LENGTH_SHORT).show()
             }
@@ -48,7 +48,7 @@ class MainActivity : ComponentActivity() {
             permission = Manifest.permission.ACCESS_FINE_LOCATION,
             permissionLauncher = permissionLauncher,
             onPermissionGranted = {
-                viewModel.getCurrentLocation()
+                viewModel.getCurrentWeather()
             }
         )
 

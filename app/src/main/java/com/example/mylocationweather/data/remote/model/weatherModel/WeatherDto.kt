@@ -1,7 +1,8 @@
-package com.example.mylocationweather.data.remote.model
+package com.example.mylocationweather.data.remote.model.weatherModel
+
+import com.example.mylocationweather.data.remote.model.weatherModel.Hourly
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-
 
 @Serializable
 data class WeatherDto(
@@ -11,7 +12,3 @@ data class WeatherDto(
     val hourly: Hourly,
     val daily: Daily
 )
-
-
-
-

@@ -1,6 +1,6 @@
 package com.example.mylocationweather.domain.usecase
 
-import com.example.mylocationweather.domain.model.LocationInfo
+import com.example.mylocationweather.data.remote.model.LocationInfo
 import com.example.mylocationweather.domain.repository.LocationRepository
 
 class GetCurrentLocationUseCase(

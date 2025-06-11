@@ -1,6 +1,6 @@
 package com.example.mylocationweather.data.repository
 
-import com.example.mylocationweather.domain.model.LocationInfo
+import com.example.mylocationweather.data.remote.model.LocationInfo
 import com.example.mylocationweather.domain.repository.LocationRepository
 import com.example.mylocationweather.domain.service.LocationService
 

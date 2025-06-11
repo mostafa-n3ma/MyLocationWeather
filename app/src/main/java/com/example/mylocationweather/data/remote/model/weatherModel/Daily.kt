@@ -1,8 +1,7 @@
-package com.example.mylocationweather.data.remote.model
+package com.example.mylocationweather.data.remote.model.weatherModel
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-
 
 @Serializable
 data class Daily(
@@ -13,5 +12,3 @@ data class Daily(
     @SerialName("uv_index_max") val uvIndexMax: List<Double>,
     @SerialName("precipitation_sum") val precipitationSum: List<Double>
 )
-
-//take first 24 item

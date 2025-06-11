@@ -14,11 +14,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
@@ -28,6 +30,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.mylocationweather.R
 import com.example.mylocationweather.pressentation.utils.WeatherCondition
+import com.example.mylocationweather.pressentation.utils.dropShadow
 import com.example.mylocationweather.pressentation.utils.getCondition
 import com.example.mylocationweather.pressentation.utils.getConditionResourceId
 import com.example.mylocationweather.ui.theme.DisplayMode
@@ -81,7 +84,7 @@ fun TodaySection(
                 HourlyItem(
                     displayMode = displayMode,
                     painter = painterResource(getConditionResourceId(condition = getCondition(todayItemState.conditionCode),displayMode = displayMode)),
-                    temp = "${todayItemState.temp}°C",
+                    temp = todayItemState.temp,
                     hour = todayItemState.hour
                 )
             }
@@ -173,12 +176,28 @@ fun HourlyItem(
                 )
                 .padding(bottom = 16.dp),
         ) {
+            if (displayMode == DisplayMode.Day){
+                Box(
+                    modifier = Modifier
+                        .align(Alignment.Center)
+                        .size(20.dp)
+                        .dropShadow(
+                            shape = CircleShape,
+                            color = Color(0xFF050000),
+                            blur = 70.dp,
+                            spread = 1.dp
+                        )
+
+                    ,
+                )
+            }
+
             Column(
                 modifier = Modifier.align(Alignment.BottomCenter),
                 verticalArrangement = Arrangement.spacedBy(4.dp)
             ) {
                 Text(
-                    text = "$temp",
+                    text = "$temp°C",
                     style = TextStyle(
                         fontFamily = UrbanistFont,
                         fontSize = 16.sp,
@@ -209,6 +228,8 @@ fun HourlyItem(
             }
 
         }
+
+
         Image(
             modifier = Modifier
                 .align(Alignment.TopCenter)
@@ -239,19 +260,19 @@ fun HourlyPreview(modifier: Modifier = Modifier) {
             HourlyItem(
                 displayMode = DisplayMode.Day,
                 painter = painterResource(R.drawable.clear_sky),
-                temp = "25C",
+                temp = "25",
                 hour = "11:00",
             )
             HourlyItem(
                 displayMode = DisplayMode.Day,
                 painter = painterResource(R.drawable.clear_sky),
-                temp = "25C",
+                temp = "25",
                 hour = "11:00",
             )
             HourlyItem(
                 displayMode = DisplayMode.Day,
                 painter = painterResource(R.drawable.clear_sky),
-                temp = "25C",
+                temp = "25",
                 hour = "11:00",
             )
 
