@@ -146,7 +146,7 @@ fun HomeScreenContent(
                                 DisplayMode.Day -> painterResource(R.drawable.icon_humidity)
                                 DisplayMode.Night -> painterResource(R.drawable.icon_humidity_night)
                             },
-                            mainText = "${homeUiState.humidity}%",
+                            mainText = "${homeUiState.humidity}${homeUiState.units.humidity}%",
                             subText = "Humidity"
                         )
                         WeatherDetailItem(
@@ -156,7 +156,7 @@ fun HomeScreenContent(
                                 DisplayMode.Day -> painterResource(R.drawable.icon_rain)
                                 DisplayMode.Night -> painterResource(R.drawable.icon_rain_night)
                             },
-                            mainText = "${homeUiState.rain}%",
+                            mainText = "${homeUiState.rain}${homeUiState.units.perciption_u}",
                             subText = "Rain"
                         )
                     }
@@ -181,7 +181,7 @@ fun HomeScreenContent(
                                 DisplayMode.Day -> painterResource(R.drawable.icon_arrow_down_05)
                                 DisplayMode.Night -> painterResource(R.drawable.icon_arrow_down_05_night)
                             },
-                            mainText = "${homeUiState.pressure} hPa",
+                            mainText = "${homeUiState.pressure} ${homeUiState.units.pressure_u}",
                             subText = "Pressure"
                         )
                         WeatherDetailItem(
@@ -191,7 +191,7 @@ fun HomeScreenContent(
                                 DisplayMode.Day -> painterResource(R.drawable.icon_temperature)
                                 DisplayMode.Night -> painterResource(R.drawable.icon_temperature_night)
                             },
-                            mainText = "${homeUiState.feelsLike}°C",
+                            mainText = "${homeUiState.feelsLike}${homeUiState.units.temp_u}",
                             subText = "Feels like"
                         )
                     }
@@ -200,14 +200,16 @@ fun HomeScreenContent(
             item {
                 TodaySection(
                     displayMode = displayMode,
-                    todayStateList = homeUiState.todayItems
+                    todayStateList = homeUiState.todayItems,
+                    tempUnit = homeUiState.units.temp_u
                 )
             }
 
             item {
                 NextSevenDaysSection(
                     displayMode = displayMode,
-                    nextDaysItems = homeUiState.nextDaysItems
+                    nextDaysItems = homeUiState.nextDaysItems,
+                    tempUnit = homeUiState.units.temp_u
                 )
             }
 

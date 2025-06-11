@@ -8,7 +8,7 @@ import com.example.mylocationweather.pressentation.utils.getDayName
 
 
 data class WeatherEntity(
-    val cityName: String="",
+    val cityName: String = "",
     val currentTemperature: Int,
     val currentWindSpeed: Int,
     val currentWeatherCode: Int,
@@ -31,7 +31,12 @@ data class WeatherEntity(
     val hourlyPressure: List<Int>,
     val hours: List<String>,
     val daysNames: List<String>,
-    val isDay: String
+    val isDay: String,
+    val hourlyIsDay: List<Int>,
+    val temperatureUnit: String,
+    val pressureUnit: String,
+    val humidityUnit: String,
+    val precipitationProbabilityUnit: String
 )
 
 
@@ -41,30 +46,38 @@ fun WeatherDto.mapToEntity(): WeatherEntity {
     val currentIndex = hourly.time.indexOf(currentWeather.time).takeIf { it != -1 } ?: 0
 
     return WeatherEntity(
-        isDay = currentWeather.isDay.toString(),
-        currentTemperature = currentWeather.temperature.toInt(),//
+        currentTemperature = currentWeather.temperature.toInt(),
         currentWindSpeed = currentWeather.windSpeed.toInt(),
         currentWeatherCode = currentWeather.weatherCode,
-        currentPressure = hourly.pressureMsl.getOrNull(currentIndex)?.toInt() ?: 0,  // pressure from hourly list
+
+        currentPressure = hourly.pressureMsl.getOrNull(currentIndex)?.toInt() ?: 0,//
         currentTime = currentWeather.time,
         currentHumidity = hourly.relativeHumidity2m.getOrNull(currentIndex) ?: 0,
         currentPrecipitationProbability = hourly.precipitationProbability.getOrNull(currentIndex) ?: 0,
-        currentUvIndex = hourly.uvIndex.getOrNull(currentIndex)?.toInt() ?: 0,
+        currentUvIndex = hourly.uvIndex.getOrNull(currentIndex)?.toInt() ?: 0,  // pressure from hourly list
         feelsLikeTemperature = hourly.temperature2m.getOrNull(currentIndex)?.toInt()?: 0,
-
-        daysNames = daily.time.map { getDayName(it) },
         dailyTemperaturesMax = daily.temperatureMax.map { it.toInt() },
+
         dailyTemperaturesMin = daily.temperatureMin.map { it.toInt() },
         dailyWeatherCodes = daily.weatherCode,
+
         dailyUvIndexMax = daily.uvIndexMax.map { it.toInt() },
         dailyPrecipitationSum = daily.precipitationSum.map { it.toInt() },
-
-        hours=hourly.time.take(24).map { formatTime(it) },
         hourlyTemperatures = hourly.temperature2m.take(24).map { it.toInt() },
+
         hourlyPrecipitationProbability = hourly.precipitationProbability.take(24),
         hourlyHumidity = hourly.relativeHumidity2m.take(24),
         hourlyWeatherCodes = hourly.weatherCode.take(24),
         hourlyUvIndex = hourly.uvIndex.take(24).map { it.toInt() },
         hourlyPressure = hourly.pressureMsl.take(24).map { it.toInt() },
+        hours=hourly.time.take(24).map { formatTime(it) },
+
+        daysNames = daily.time.map { getDayName(it) },
+        isDay = currentWeather.isDay.toString(),
+        hourlyIsDay = hourly.isDay,
+        temperatureUnit = hourlyUnits.temperature2m,
+        pressureUnit = hourlyUnits.pressureMsl,
+        humidityUnit = hourlyUnits.relativeHumidity2m,
+        precipitationProbabilityUnit = hourlyUnits.precipitationProbability,
     )
 }

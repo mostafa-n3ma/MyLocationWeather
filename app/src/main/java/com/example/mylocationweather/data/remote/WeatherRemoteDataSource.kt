@@ -19,13 +19,14 @@ class WeatherRemoteDataSource(
             parameter("current_weather", true)
             parameter(
                 "hourly",
-                "temperature_2m,precipitation_probability,relativehumidity_2m,weathercode,uv_index,pressure_msl"
+                "temperature_2m,precipitation_probability,relativehumidity_2m,weathercode,uv_index,pressure_msl,is_day"
             )
             parameter(
                 "daily",
                 "temperature_2m_max,temperature_2m_min,weathercode,uv_index_max,precipitation_sum"
             )
             parameter("timezone", "auto")
+            parameter("forecast_days", 8)
         }.body()
     }
 

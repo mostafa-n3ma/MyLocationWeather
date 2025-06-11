@@ -27,24 +27,32 @@ fun getHomeUiState(weatherEntity: WeatherEntity): HomeUiState{
             weatherCondition = getCondition(weatherEntity.currentWeatherCode),
             temp = weatherEntity.currentTemperature.toString(),
             highTemp = weatherEntity.dailyTemperaturesMax[0].toString(),
-            lowTemp = weatherEntity.dailyTemperaturesMin[0].toString()
+            lowTemp = weatherEntity.dailyTemperaturesMin[0].toString(),
+            tempUnit = weatherEntity.temperatureUnit
         ),
         windSpeed = weatherEntity.currentWindSpeed.toString(),
         humidity = weatherEntity.currentHumidity.toString(),
-        rain = weatherEntity.hourlyPrecipitationProbability.average().toString(),
+        rain = weatherEntity.hourlyPrecipitationProbability.average().toInt().toString(),
         uvIndex = weatherEntity.currentUvIndex.toString(),
         pressure = weatherEntity.currentPressure.toString(),
         feelsLike = weatherEntity.feelsLikeTemperature.toString(),
         todayItems = getTodayItemUiStateList(
             conditionCodeList = weatherEntity.hourlyWeatherCodes,
             hours = weatherEntity.hours,
-            temperatureList = weatherEntity.hourlyTemperatures.map { it.toString() }
+            temperatureList = weatherEntity.hourlyTemperatures.map { it.toString() },
+            isDayList = weatherEntity.hourlyIsDay,
         ),
         nextDaysItems = getNextDaysItemUiStateList(
             dayNames = weatherEntity.daysNames,
             conditionCodeList = weatherEntity.dailyWeatherCodes,
             highTempList = weatherEntity.dailyTemperaturesMax.map { it.toString() },
             lowTempList = weatherEntity.dailyTemperaturesMin.map { it.toString() }
+        ),
+        units = unitsState(
+            temp_u = weatherEntity.temperatureUnit,
+            perciption_u = weatherEntity.precipitationProbabilityUnit,
+            pressure_u = weatherEntity.pressureUnit,
+            humidity = weatherEntity.humidityUnit
         )
     )
 }
@@ -71,14 +79,23 @@ fun getNextDaysItemUiStateList(
 fun getTodayItemUiStateList(
     conditionCodeList: List<Int>,
     hours: List<String>,
-    temperatureList: List<String>
+    temperatureList: List<String>,
+    isDayList: List<Int>
 ): List<TodayItemUiState> {
 
     return conditionCodeList.mapIndexed { index, code ->
         TodayItemUiState(
             conditionCode = code,
             temp = temperatureList[index],
-            hour = hours[index]
+            hour = hours[index],
+            isDay = isDayList[index]
         )
     }
 }
+
+data class unitsState(
+    val temp_u: String,
+    val perciption_u: String,
+    val pressure_u: String,
+    val humidity: String
+)

@@ -9,6 +9,10 @@ data class WeatherDto(
     @SerialName("latitude") val latitude: Double,
     @SerialName("longitude") val longitude: Double,
     @SerialName("current_weather") val currentWeather: CurrentWeather,
+    @SerialName("hourly_units") val hourlyUnits: HourlyUnits,
     val hourly: Hourly,
     val daily: Daily
 )
+
+
+

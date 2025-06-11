@@ -43,7 +43,6 @@ import com.example.mylocationweather.ui.theme.HighLowTempRangDaySpacerColor
 import com.example.mylocationweather.ui.theme.HighLowTempRangDayTextColor
 import com.example.mylocationweather.ui.theme.HighLowTempRangNightSpacerColor
 import com.example.mylocationweather.ui.theme.HighLowTempRangNightTextColor
-import com.example.mylocationweather.ui.theme.MainBackgroundDayLinearGradient
 import com.example.mylocationweather.ui.theme.MainBackgroundNightLinearGradient
 import com.example.mylocationweather.ui.theme.Next7DyesBorderDayColor
 import com.example.mylocationweather.ui.theme.Next7DyesBorderNightColor
@@ -58,12 +57,12 @@ data class NextDaysItemUiState(
     val lowTemp: String,
 )
 
-
 @Composable
 fun NextSevenDaysSection(
     modifier: Modifier = Modifier,
     displayMode: DisplayMode,
-    nextDaysItems: List<NextDaysItemUiState>
+    nextDaysItems: List<NextDaysItemUiState>,
+    tempUnit: String
 ) {
     Column(
         modifier = modifier.fillMaxWidth(),
@@ -104,7 +103,7 @@ fun NextSevenDaysSection(
                     shape = RoundedCornerShape(24.dp)
                 )
         ) {
-            nextDaysItems.forEachIndexed { index, item ->
+            nextDaysItems.drop(1).forEachIndexed { index, item ->
                 val modifier = when (index) {
                     0 -> Modifier.border(
                         width = 1.dp,
@@ -140,11 +139,12 @@ fun NextSevenDaysSection(
                     painter = painterResource(
                         getConditionResourceId(
                             condition = getCondition(item.conditionCode),
-                            displayMode = displayMode
+                            displayMode = DisplayMode.Day
                         )
                     ),
                     highTemp = item.highTemp,
                     lowTemp = item.lowTemp,
+                    tempUnit = tempUnit
                 )
             }
 
@@ -206,7 +206,7 @@ fun NextSevenDaysSectionP(modifier: Modifier = Modifier) {
             .background(brush = MainBackgroundNightLinearGradient)
             .padding(horizontal = 16.dp)
     ) {
-        NextSevenDaysSection(displayMode = DisplayMode.Night, nextDaysItems = nextDaysItems)
+        NextSevenDaysSection(displayMode = DisplayMode.Night, nextDaysItems = nextDaysItems, tempUnit = "C")
     }
 }
 
@@ -219,6 +219,7 @@ fun DailyItem(
     painter: Painter,
     highTemp: String,
     lowTemp: String,
+    tempUnit: String,
 ) {
     Box(
         modifier = modifier
@@ -290,7 +291,7 @@ fun DailyItem(
                     contentDescription = null
                 )
                 Text(
-                    text = "$highTemp°C",
+                    text = "$highTemp$tempUnit",
                     style = TextStyle(
                         fontFamily = UrbanistFont,
                         fontSize = 16.sp,
@@ -331,7 +332,7 @@ fun DailyItem(
                     contentDescription = null
                 )
                 Text(
-                    text = "$lowTemp°C",
+                    text = "$lowTemp$tempUnit",
                     style = TextStyle(
                         fontFamily = UrbanistFont,
                         fontSize = 16.sp,
@@ -353,30 +354,31 @@ fun DailyItem(
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun DailyItemP(modifier: Modifier = Modifier) {
-    val day = NextDaysItemUiState(
-        dayName = "Monday",
-        conditionCode = WeatherCondition.MAINLY_CLEAR.code,
-        highTemp = "35",
-        lowTemp = "25"
-    )
-
-    DailyItem(
-        displayMode = DisplayMode.Day,
-        dayName = day.dayName,
-        painter = painterResource(
-            getConditionResourceId(
-                condition = getCondition(day.conditionCode),
-                displayMode = DisplayMode.Day
-            )
-        ),
-        highTemp = day.highTemp,
-        lowTemp = day.lowTemp
-    )
-
-
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun DailyItemP(modifier: Modifier = Modifier) {
+//    val day = NextDaysItemUiState(
+//        dayName = "Monday",
+//        conditionCode = WeatherCondition.MAINLY_CLEAR.code,
+//        highTemp = "35",
+//        lowTemp = "25"
+//    )
+//
+//    DailyItem(
+//        displayMode = DisplayMode.Day,
+//        dayName = day.dayName,
+//        painter = painterResource(
+//            getConditionResourceId(
+//                condition = getCondition(day.conditionCode),
+//                displayMode = DisplayMode.Day
+//            )
+//        ),
+//        highTemp = day.highTemp,
+//        lowTemp = day.lowTemp,
+//        tempUnit = tempUnit
+//    )
+//
+//
+//}
 
 

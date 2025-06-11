@@ -49,6 +49,7 @@ import com.example.mylocationweather.ui.theme.UrbanistFont
 
 data class TodayItemUiState(
     val conditionCode: Int,
+    val isDay: Int,
     val temp: String,
     val hour: String
 )
@@ -57,7 +58,8 @@ data class TodayItemUiState(
 fun TodaySection(
     modifier: Modifier = Modifier,
     displayMode: DisplayMode,
-    todayStateList: List<TodayItemUiState>
+    todayStateList: List<TodayItemUiState>,
+    tempUnit: String
 ) {
     Column(
         modifier = modifier.fillMaxWidth(),
@@ -81,11 +83,17 @@ fun TodaySection(
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             items (todayStateList){todayItemState->
+                val dailyDisplayMode = when(todayItemState.isDay){
+                    1 -> DisplayMode.Day
+                    0 -> DisplayMode.Night
+                    else -> DisplayMode.Day
+                }
                 HourlyItem(
                     displayMode = displayMode,
-                    painter = painterResource(getConditionResourceId(condition = getCondition(todayItemState.conditionCode),displayMode = displayMode)),
+                    painter = painterResource(getConditionResourceId(condition = getCondition(todayItemState.conditionCode),displayMode = dailyDisplayMode)),
                     temp = todayItemState.temp,
-                    hour = todayItemState.hour
+                    hour = todayItemState.hour,
+                    tempUnit = tempUnit
                 )
             }
         }
@@ -101,32 +109,38 @@ fun TodaySectionP(modifier: Modifier = Modifier) {
         TodayItemUiState(
             temp = "25",
             hour = "11:00",
-            conditionCode = WeatherCondition.MAINLY_CLEAR.code
+            conditionCode = WeatherCondition.MAINLY_CLEAR.code,
+            isDay = 1
         ),
         TodayItemUiState(
             conditionCode = WeatherCondition.MAINLY_CLEAR.code,
             temp = "25",
-            hour = "11:00"
+            hour = "11:00",
+            isDay = 1
         ),
         TodayItemUiState(
             conditionCode = WeatherCondition.MAINLY_CLEAR.code,
             temp = "25",
-            hour = "11:00"
+            hour = "11:00",
+            isDay = 1
         ),
         TodayItemUiState(
             conditionCode = WeatherCondition.MAINLY_CLEAR.code,
             temp = "25",
-            hour = "11:00"
+            hour = "11:00",
+            isDay = 0
         ),
         TodayItemUiState(
             conditionCode = WeatherCondition.MAINLY_CLEAR.code,
             temp = "25",
-            hour = "11:00"
+            hour = "11:00",
+            isDay = 0
         ),
         TodayItemUiState(
             conditionCode = WeatherCondition.MAINLY_CLEAR.code,
             temp = "25",
-            hour = "11:00"
+            hour = "11:00",
+            isDay = 0
         ),
     )
     Column(
@@ -138,6 +152,7 @@ fun TodaySectionP(modifier: Modifier = Modifier) {
         TodaySection(
             displayMode = DisplayMode.Day,
             todayStateList = todayStateList,
+            tempUnit = "c"
         )
     }
 }
@@ -147,9 +162,10 @@ fun TodaySectionP(modifier: Modifier = Modifier) {
 fun HourlyItem(
     modifier: Modifier = Modifier,
     displayMode: DisplayMode,
-    painter:Painter,
+    painter: Painter,
     temp: String,
-    hour: String
+    hour: String,
+    tempUnit: String,
 ) {
     Box(
         modifier = modifier,
@@ -197,7 +213,7 @@ fun HourlyItem(
                 verticalArrangement = Arrangement.spacedBy(4.dp)
             ) {
                 Text(
-                    text = "$temp°C",
+                    text = "$temp$tempUnit",
                     style = TextStyle(
                         fontFamily = UrbanistFont,
                         fontSize = 16.sp,
@@ -242,41 +258,41 @@ fun HourlyItem(
 
 }
 
-@Preview
-@Composable
-fun HourlyPreview(modifier: Modifier = Modifier) {
-    Column(
-        modifier
-            .fillMaxSize()
-            .background(MainBackgroundDayLinearGradient)
-    ) {
-        Row(
-            modifier
-                .fillMaxWidth()
-                .padding(start = 16.dp),
-            verticalAlignment = Alignment.Bottom,
-            horizontalArrangement = Arrangement.spacedBy(12.dp)
-        ) {
-            HourlyItem(
-                displayMode = DisplayMode.Day,
-                painter = painterResource(R.drawable.clear_sky),
-                temp = "25",
-                hour = "11:00",
-            )
-            HourlyItem(
-                displayMode = DisplayMode.Day,
-                painter = painterResource(R.drawable.clear_sky),
-                temp = "25",
-                hour = "11:00",
-            )
-            HourlyItem(
-                displayMode = DisplayMode.Day,
-                painter = painterResource(R.drawable.clear_sky),
-                temp = "25",
-                hour = "11:00",
-            )
-
-        }
-    }
-
-}
+//@Preview
+//@Composable
+//fun HourlyPreview(modifier: Modifier = Modifier) {
+//    Column(
+//        modifier
+//            .fillMaxSize()
+//            .background(MainBackgroundDayLinearGradient)
+//    ) {
+//        Row(
+//            modifier
+//                .fillMaxWidth()
+//                .padding(start = 16.dp),
+//            verticalAlignment = Alignment.Bottom,
+//            horizontalArrangement = Arrangement.spacedBy(12.dp)
+//        ) {
+//            HourlyItem(
+//                displayMode = DisplayMode.Day,
+//                painter = painterResource(R.drawable.clear_sky),
+//                temp = "25",
+//                hour = "11:00",
+//            )
+//            HourlyItem(
+//                displayMode = DisplayMode.Day,
+//                painter = painterResource(R.drawable.clear_sky),
+//                temp = "25",
+//                hour = "11:00",
+//            )
+//            HourlyItem(
+//                displayMode = DisplayMode.Day,
+//                painter = painterResource(R.drawable.clear_sky),
+//                temp = "25",
+//                hour = "11:00",
+//            )
+//
+//        }
+//    }
+//
+//}

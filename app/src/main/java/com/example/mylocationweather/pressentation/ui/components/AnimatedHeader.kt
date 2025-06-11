@@ -1,8 +1,5 @@
 package com.example.mylocationweather.pressentation.ui.components
 
-import android.graphics.BlurMaskFilter
-import androidx.compose.animation.core.animateDpAsState
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -31,19 +28,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.BlurredEdgeTreatment
 import androidx.compose.ui.draw.blur
-import androidx.compose.ui.draw.drawBehind
-import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Paint
-import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.graphics.drawOutline
-import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.mylocationweather.R
@@ -76,7 +66,8 @@ data class AnimatedHeaderUiState(
     val weatherCondition: WeatherCondition,
     val temp: String,
     val highTemp: String,//dailyTemperaturesMax
-    val lowTemp: String//dailyTemperaturesMin
+    val lowTemp: String, //dailyTemperaturesMinm
+    val tempUnit: String
 )
 
 
@@ -156,6 +147,7 @@ fun AnimatedHeader(
             condition = state.weatherCondition.conditionDescription,
             highTemp = state.highTemp,
             lowTemp = state.lowTemp,
+            tempUnit = state.tempUnit
         )
     }
 }
@@ -181,7 +173,8 @@ fun PreviewAnimatedHeaderDay() {
         weatherCondition = WeatherCondition.CLEAR_SKY,
         temp = "35",
         highTemp = "35",
-        lowTemp = "20"
+        lowTemp = "20",
+        tempUnit = "C"
     )
     Column(
         modifier = Modifier
@@ -215,7 +208,8 @@ fun PreviewAnimatedHeaderNight() {
         weatherCondition = WeatherCondition.CLEAR_SKY,
         temp = "35C",
         highTemp = "35C",
-        lowTemp = "20C"
+        lowTemp = "20C",
+        tempUnit = "C"
     )
 
     Column(
@@ -244,7 +238,8 @@ fun TempInfoRang(
     temp: String,
     condition: String,
     highTemp: String,
-    lowTemp: String
+    lowTemp: String,
+    tempUnit: String
 ) {
     Column(
         modifier = modifier.width(167.dp),
@@ -256,7 +251,7 @@ fun TempInfoRang(
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Text(
-                text = "${temp}°C",
+                text = "${temp}${tempUnit}",
                 style = TextStyle(
                     fontFamily = UrbanistFont,
                     fontSize = 64.sp,
@@ -316,7 +311,7 @@ fun TempInfoRang(
                     contentDescription = null
                 )
                 Text(
-                    text = "${highTemp}°C",
+                    text = "$highTemp$tempUnit",
                     style = TextStyle(
                         fontFamily = UrbanistFont,
                         fontSize = 16.sp,
@@ -360,7 +355,7 @@ fun TempInfoRang(
                     contentDescription = null
                 )
                 Text(
-                    text = "${lowTemp}°C",
+                    text = "${lowTemp}$tempUnit",
                     style = TextStyle(
                         fontFamily = UrbanistFont,
                         fontSize = 16.sp,
@@ -382,38 +377,40 @@ fun TempInfoRang(
     }
 }
 
-@Preview
-@Composable
-fun TempInfoRangP(modifier: Modifier = Modifier) {
-    Column {
-        Box(
-            Modifier.background(brush = MainBackgroundDayLinearGradient),
-            contentAlignment = Alignment.Center
-        ) {
-            TempInfoRang(
-                displayMode = DisplayMode.Day,
-                temp = "25",
-                condition = "Partly Cloudy",
-                highTemp = "35",
-                lowTemp = "20",
-            )
-
-        }
-        Box(
-            Modifier.background(brush = MainBackgroundNightLinearGradient),
-            contentAlignment = Alignment.Center
-        ) {
-            TempInfoRang(
-                displayMode = DisplayMode.Night,
-                temp = "25",
-                condition = "Partly Cloudy",
-                highTemp = "35",
-                lowTemp = "20",
-            )
-        }
-    }
-
-}
+//@Preview
+//@Composable
+//fun TempInfoRangP(modifier: Modifier = Modifier) {
+//    Column {
+//        Box(
+//            Modifier.background(brush = MainBackgroundDayLinearGradient),
+//            contentAlignment = Alignment.Center
+//        ) {
+//            TempInfoRang(
+//                displayMode = DisplayMode.Day,
+//                temp = "25",
+//                condition = "Partly Cloudy",
+//                highTemp = "35",
+//                lowTemp = "20",
+//                tempUnit = state.tempUnit,
+//            )
+//
+//        }
+//        Box(
+//            Modifier.background(brush = MainBackgroundNightLinearGradient),
+//            contentAlignment = Alignment.Center
+//        ) {
+//            TempInfoRang(
+//                displayMode = DisplayMode.Night,
+//                temp = "25",
+//                condition = "Partly Cloudy",
+//                highTemp = "35",
+//                lowTemp = "20",
+//                tempUnit = state.tempUnit,
+//            )
+//        }
+//    }
+//
+//}
 
 
 @Preview

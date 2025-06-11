@@ -18,12 +18,11 @@ fun getDayName(input: String): String {
     return date.dayOfWeek.getDisplayName(TextStyle.FULL, Locale.getDefault())
 }
 
-
 @RequiresApi(Build.VERSION_CODES.O)
 fun formatTime(input: String): String {
     // Parse the input string into LocalDateTime
     val dateTime = LocalDateTime.parse(input, DateTimeFormatter.ISO_DATE_TIME)
 
-    // Format to extract only "HH:mm" (24-hour format)
-    return dateTime.format(DateTimeFormatter.ofPattern("HH:mm"))
+    // Format to 12-hour format without AM/PM (e.g., 03:45)
+    return dateTime.format(DateTimeFormatter.ofPattern("hh:mm"))
 }
