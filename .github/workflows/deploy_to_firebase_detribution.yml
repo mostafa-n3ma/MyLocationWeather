@@ -49,6 +49,7 @@ jobs:
           keyStorePassword: ${{ secrets.KEYSTORE_PASSWORD }}
           alias: ${{ secrets.ANDROID_KEY_ALIAS }}
           keyPassword: ${{ secrets.ANDROID_KEY_ALIAS_PASSWORD }}
+          buildToolsVersion: "34.0.0"
 
 
       - name: Upload to Firebase App Distribution
