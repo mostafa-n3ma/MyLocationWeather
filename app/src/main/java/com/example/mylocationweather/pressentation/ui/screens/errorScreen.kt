@@ -36,8 +36,10 @@ fun ErrorScreen(
     modifier: Modifier = Modifier,
     onRetry: () -> Unit
 ) {
-    Column (
-        modifier = modifier.fillMaxSize().background(MainBackgroundNightLinearGradient),
+    Column(
+        modifier = modifier
+            .fillMaxSize()
+            .background(MainBackgroundNightLinearGradient),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
 
@@ -59,18 +61,17 @@ fun ErrorScreen(
         )
         Box(
             contentAlignment = Alignment.Center
-        ){
+        ) {
             Text(
                 modifier = Modifier
                     .background(
                         Color(0xFF1F1E2B),
-                        shape = RoundedCornerShape(20.dp))
+                        shape = RoundedCornerShape(20.dp)
+                    )
                     .padding(12.dp)
-                    .clickable{
+                    .clickable {
                         onRetry()
-                    }
-
-                ,
+                    },
                 text = "Retry",
                 style = TextStyle(
                     fontFamily = UrbanistFont,
@@ -83,7 +84,6 @@ fun ErrorScreen(
 
     }
 }
-
 
 
 @Preview

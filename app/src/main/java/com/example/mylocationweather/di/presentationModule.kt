@@ -8,6 +8,6 @@ val PresentationModule = module {
     viewModel {
         HomeViewModel(
             getWeatherUseCase = get()
-            )
+        )
     }
 }

@@ -8,7 +8,7 @@ import com.example.mylocationweather.ui.theme.DisplayMode
 data class HomeUiState(
     val cityName: String,
     val headerUiState: AnimatedHeaderUiState,
-    val units:unitsState,
+    val units: unitsState,
     val windSpeed: String,
     val humidity: String,
     val rain: String,

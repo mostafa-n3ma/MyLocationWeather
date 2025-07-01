@@ -48,7 +48,7 @@ jobs:
           signingKeyBase64: ${{ secrets.ANDROID_KEYSTORE }}
           keyStorePassword: ${{ secrets.KEYSTORE_PASSWORD }}
           alias: ${{ secrets.ANDROID_KEY_ALIAS }}
-          keyPassword:  ${{ secrets.ANDROID_KEY_ALIAS_PASSWORD }}
+          keyPassword: ${{ secrets.ANDROID_KEY_ALIAS_PASSWORD }}
 
 
       - name: Upload to Firebase App Distribution

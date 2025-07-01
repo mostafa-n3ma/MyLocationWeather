@@ -51,20 +51,18 @@ dependencies {
     implementation(libs.coil.compose)
 
 
-    implementation (libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.kotlinx.coroutines.play.services)
 
 
-    implementation (libs.play.services.location) // or the latest version
+    implementation(libs.play.services.location) // or the latest version
 
 
-    implementation (libs.ktor.client.core  )       // Core Ktor client
-    implementation (libs.ktor.client.cio   )       // CIO engine
-    implementation( libs.ktor.client.content.negotiation )// Content negotiation (for JSON)
-    implementation( libs.ktor.serialization.kotlinx.json) // Kotlinx JSON serializer
-
-
+    implementation(libs.ktor.client.core)       // Core Ktor client
+    implementation(libs.ktor.client.cio)       // CIO engine
+    implementation(libs.ktor.client.content.negotiation)// Content negotiation (for JSON)
+    implementation(libs.ktor.serialization.kotlinx.json) // Kotlinx JSON serializer
 
 
     implementation(libs.androidx.core.ktx)

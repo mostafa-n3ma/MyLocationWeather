@@ -57,7 +57,7 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             MyLocationWeatherTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) {innerPadding->
+                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     HomeScreen(
                         viewModel = viewModel,
                         innerPadding = innerPadding

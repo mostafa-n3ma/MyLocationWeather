@@ -13,16 +13,20 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.mylocationweather.R
 
 @Composable
- fun LoadingScreen(modifier: Modifier = Modifier) {
+fun LoadingScreen(modifier: Modifier = Modifier) {
     Box(
         modifier = modifier.fillMaxSize(),
     ) {
         Image(
-            modifier = Modifier.align(Alignment.Center).scale(2f),
+            modifier = Modifier
+                .align(Alignment.Center)
+                .scale(2f),
             painter = painterResource(R.drawable.partly_cloudy),
             contentDescription = null
         )
-        CircularProgressIndicator(Modifier.align(Alignment.Center).scale(2f))
+        CircularProgressIndicator(Modifier
+            .align(Alignment.Center)
+            .scale(2f))
     }
 }
 

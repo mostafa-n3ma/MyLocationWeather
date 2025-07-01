@@ -30,19 +30,17 @@ fun CitNameComponent(
     cityName: String
 
 ) {
-    Row (
+    Row(
         modifier = modifier,
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(4.dp)
-    ){
+    ) {
         Image(
             modifier = Modifier.size(24.dp),
-            painter = when(displayMode){
+            painter = when (displayMode) {
                 DisplayMode.Day -> painterResource(R.drawable.icon_location)
                 DisplayMode.Night -> painterResource(R.drawable.icon_location_night)
-            }
-
-            ,
+            },
             contentDescription = null
         )
 
@@ -54,7 +52,7 @@ fun CitNameComponent(
                 fontSize = 16.sp,
                 lineHeight = 20.sp,
                 letterSpacing = 0.25.sp,
-                color = when(displayMode){
+                color = when (displayMode) {
                     DisplayMode.Day -> CityTextDayColor
                     DisplayMode.Night -> CityTextNightColor
                 }
@@ -62,13 +60,13 @@ fun CitNameComponent(
         )
 
     }
-    
+
 }
 
 @Preview
 @Composable
 fun CitNameComponentP(modifier: Modifier = Modifier) {
-    Box(Modifier.background(color = Color.White)){
+    Box(Modifier.background(color = Color.White)) {
         CitNameComponent(displayMode = DisplayMode.Night, cityName = "Baghdad")
     }
 }

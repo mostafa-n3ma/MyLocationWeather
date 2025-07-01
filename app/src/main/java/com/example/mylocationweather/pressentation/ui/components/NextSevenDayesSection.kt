@@ -171,7 +171,8 @@ fun NextSevenDaysSectionP(modifier: Modifier = Modifier) {
             conditionCode = WeatherCondition.MAINLY_CLEAR.code,
             highTemp = "35",
             lowTemp = "25"
-        ),NextDaysItemUiState(
+        ),
+        NextDaysItemUiState(
             dayName = "Monday",
             conditionCode = WeatherCondition.MAINLY_CLEAR.code,
             highTemp = "35",
@@ -182,31 +183,38 @@ fun NextSevenDaysSectionP(modifier: Modifier = Modifier) {
             conditionCode = WeatherCondition.MAINLY_CLEAR.code,
             highTemp = "35",
             lowTemp = "25"
-        ),NextDaysItemUiState(
+        ),
+        NextDaysItemUiState(
             dayName = "Monday",
             conditionCode = WeatherCondition.MAINLY_CLEAR.code,
             highTemp = "35",
             lowTemp = "25"
-        ),NextDaysItemUiState(
+        ),
+        NextDaysItemUiState(
             dayName = "Monday",
             conditionCode = WeatherCondition.MAINLY_CLEAR.code,
             highTemp = "35",
             lowTemp = "25"
-        ),NextDaysItemUiState(
+        ),
+        NextDaysItemUiState(
             dayName = "Monday",
             conditionCode = WeatherCondition.MAINLY_CLEAR.code,
             highTemp = "35",
             lowTemp = "25"
         ),
 
-    )
+        )
     Column(
         modifier = Modifier
             .fillMaxSize()
             .background(brush = MainBackgroundNightLinearGradient)
             .padding(horizontal = 16.dp)
     ) {
-        NextSevenDaysSection(displayMode = DisplayMode.Night, nextDaysItems = nextDaysItems, tempUnit = "C")
+        NextSevenDaysSection(
+            displayMode = DisplayMode.Night,
+            nextDaysItems = nextDaysItems,
+            tempUnit = "C"
+        )
     }
 }
 
@@ -249,30 +257,28 @@ fun DailyItem(
                 .align(Alignment.Center)
                 .size(91.dp, 45.dp)
                 .padding(vertical = 6.dp),
-           contentAlignment = Alignment.Center
+            contentAlignment = Alignment.Center
         ) {
             Box(
                 modifier = Modifier
                     .size(15.dp)
                     .dropShadow(
                         shape = CircleShape,
-                        color = when(displayMode){
+                        color = when (displayMode) {
                             DisplayMode.Day -> Color(0xFF000000)
                             DisplayMode.Night -> Color(0xFF7A6FB0)
                         },
                         blur = 50.dp,
                         spread = 1.dp
-                    )
-
-                ,
+                    ),
             )
 
-                Image(
-                    painter = painter,
-                    contentDescription = null,
-                    contentScale = ContentScale.Inside
-                )
-            }
+            Image(
+                painter = painter,
+                contentDescription = null,
+                contentScale = ContentScale.Inside
+            )
+        }
 
 
         Row(

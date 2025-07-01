@@ -40,7 +40,6 @@ data class WeatherEntity(
 )
 
 
-
 @RequiresApi(Build.VERSION_CODES.O)
 fun WeatherDto.mapToEntity(): WeatherEntity {
     val currentIndex = hourly.time.indexOf(currentWeather.time).takeIf { it != -1 } ?: 0
@@ -53,9 +52,11 @@ fun WeatherDto.mapToEntity(): WeatherEntity {
         currentPressure = hourly.pressureMsl.getOrNull(currentIndex)?.toInt() ?: 0,//
         currentTime = currentWeather.time,
         currentHumidity = hourly.relativeHumidity2m.getOrNull(currentIndex) ?: 0,
-        currentPrecipitationProbability = hourly.precipitationProbability.getOrNull(currentIndex) ?: 0,
-        currentUvIndex = hourly.uvIndex.getOrNull(currentIndex)?.toInt() ?: 0,  // pressure from hourly list
-        feelsLikeTemperature = hourly.temperature2m.getOrNull(currentIndex)?.toInt()?: 0,
+        currentPrecipitationProbability = hourly.precipitationProbability.getOrNull(currentIndex)
+            ?: 0,
+        currentUvIndex = hourly.uvIndex.getOrNull(currentIndex)?.toInt()
+            ?: 0,  // pressure from hourly list
+        feelsLikeTemperature = hourly.temperature2m.getOrNull(currentIndex)?.toInt() ?: 0,
         dailyTemperaturesMax = daily.temperatureMax.map { it.toInt() },
 
         dailyTemperaturesMin = daily.temperatureMin.map { it.toInt() },
@@ -70,7 +71,7 @@ fun WeatherDto.mapToEntity(): WeatherEntity {
         hourlyWeatherCodes = hourly.weatherCode.take(24),
         hourlyUvIndex = hourly.uvIndex.take(24).map { it.toInt() },
         hourlyPressure = hourly.pressureMsl.take(24).map { it.toInt() },
-        hours=hourly.time.take(24).map { formatTime(it) },
+        hours = hourly.time.take(24).map { formatTime(it) },
 
         daysNames = daily.time.map { getDayName(it) },
         isDay = currentWeather.isDay.toString(),

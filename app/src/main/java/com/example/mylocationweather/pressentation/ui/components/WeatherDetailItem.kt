@@ -43,15 +43,15 @@ fun WeatherDetailItem(
     modifier: Modifier = Modifier,
     displayMode: DisplayMode,
     painter: Painter,
-    mainText : String,
-    subText : String,
+    mainText: String,
+    subText: String,
 ) {
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .aspectRatio(108.dp/115.dp)
+            .aspectRatio(108.dp / 115.dp)
             .background(
-                color = when(displayMode){
+                color = when (displayMode) {
                     DisplayMode.Day -> WeatherDetailItemDayBackground
                     DisplayMode.Night -> WeatherDetailItemNightBackground
                 },
@@ -59,27 +59,26 @@ fun WeatherDetailItem(
             )
             .border(
                 width = 1.dp,
-                color = when(displayMode){
+                color = when (displayMode) {
                     DisplayMode.Day -> WeatherDetailItemDayBorderColor
                     DisplayMode.Night -> WeatherDetailItemNightBorderColor
                 },
                 shape = RoundedCornerShape(24.dp)
-            )
-        ,
+            ),
         contentAlignment = Alignment.Center
-    ){
+    ) {
         Column(
             modifier = Modifier,
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(8.dp)
-        ){
+        ) {
             Image(
                 painter = painter,
                 contentDescription = null
             )
-            Column (
+            Column(
                 horizontalAlignment = Alignment.CenterHorizontally
-            ){
+            ) {
                 Text(
                     text = mainText,
                     style = TextStyle(
@@ -122,9 +121,11 @@ fun WeatherDetailItem(
 @Composable
 fun WeatherDetailItemDay(modifier: Modifier = Modifier) {
     Row(
-        modifier.fillMaxWidth().background(brush = MainBackgroundDayLinearGradient),
+        modifier
+            .fillMaxWidth()
+            .background(brush = MainBackgroundDayLinearGradient),
         horizontalArrangement = Arrangement.spacedBy(6.dp)
-    ){
+    ) {
         WeatherDetailItem(
             modifier = Modifier.weight(1f),
             displayMode = DisplayMode.Day,
@@ -156,9 +157,11 @@ fun WeatherDetailItemDay(modifier: Modifier = Modifier) {
 @Composable
 fun WeatherDetailItemNight(modifier: Modifier = Modifier) {
     Row(
-        modifier.fillMaxWidth().background(brush = MainBackgroundNightLinearGradient),
+        modifier
+            .fillMaxWidth()
+            .background(brush = MainBackgroundNightLinearGradient),
         horizontalArrangement = Arrangement.spacedBy(6.dp)
-    ){
+    ) {
         WeatherDetailItem(
             modifier = Modifier.weight(1f),
             displayMode = DisplayMode.Night,

@@ -74,7 +74,7 @@ fun HomeScreenContent(
         }.collect { itemOffset ->
             itemOffset?.let { offset ->
                 Log.d("ItemTracker", " offset: $offset : screenSize:$screenSize")
-                progress = calculateProgress(offset,screenSize.second)
+                progress = calculateProgress(offset, screenSize.second)
             } ?: run {
                 // Item is not currently visible
                 progress = if (listState.firstVisibleItemIndex > 0) 0f else 1f
@@ -94,8 +94,7 @@ fun HomeScreenContent(
                     DisplayMode.Night -> MainBackgroundNightLinearGradient
                 }
             )
-            .padding(top = innerPadding.calculateTopPadding(), start = 16.dp, end = 16.dp)
-        ,
+            .padding(top = innerPadding.calculateTopPadding(), start = 16.dp, end = 16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         LazyColumn(
@@ -104,7 +103,7 @@ fun HomeScreenContent(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(24.dp),
             contentPadding = PaddingValues(vertical = 24.dp)
-        ){
+        ) {
             item {
                 CitNameComponent(
                     displayMode = displayMode,
@@ -113,7 +112,7 @@ fun HomeScreenContent(
                 Spacer(Modifier.height(12.dp))
             }
 
-            item (key = "ItemTracker"){
+            item(key = "ItemTracker") {
                 AnimatedHeader(
                     displayMode = displayMode,
                     progress = progress,
@@ -122,17 +121,17 @@ fun HomeScreenContent(
             }
 
             item {
-                Column (
+                Column(
                     verticalArrangement = Arrangement.spacedBy(6.dp)
-                ){
-                    Row (
+                ) {
+                    Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.spacedBy(6.dp)
-                    ){
+                    ) {
                         WeatherDetailItem(
                             modifier = Modifier.weight(1f),
                             displayMode = displayMode,
-                            painter = when(displayMode){
+                            painter = when (displayMode) {
                                 DisplayMode.Day -> painterResource(R.drawable.icon_fast_wind)
                                 DisplayMode.Night -> painterResource(R.drawable.icon_fast_wind_night)
                             },
@@ -142,7 +141,7 @@ fun HomeScreenContent(
                         WeatherDetailItem(
                             modifier = Modifier.weight(1f),
                             displayMode = displayMode,
-                            painter = when(displayMode){
+                            painter = when (displayMode) {
                                 DisplayMode.Day -> painterResource(R.drawable.icon_humidity)
                                 DisplayMode.Night -> painterResource(R.drawable.icon_humidity_night)
                             },
@@ -152,7 +151,7 @@ fun HomeScreenContent(
                         WeatherDetailItem(
                             modifier = Modifier.weight(1f),
                             displayMode = displayMode,
-                            painter = when(displayMode){
+                            painter = when (displayMode) {
                                 DisplayMode.Day -> painterResource(R.drawable.icon_rain)
                                 DisplayMode.Night -> painterResource(R.drawable.icon_rain_night)
                             },
@@ -160,14 +159,14 @@ fun HomeScreenContent(
                             subText = "Rain"
                         )
                     }
-                    Row (
+                    Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.spacedBy(6.dp)
-                    ){
+                    ) {
                         WeatherDetailItem(
                             modifier = Modifier.weight(1f),
                             displayMode = displayMode,
-                            painter = when(displayMode){
+                            painter = when (displayMode) {
                                 DisplayMode.Day -> painterResource(R.drawable.icon_uv)
                                 DisplayMode.Night -> painterResource(R.drawable.icon_uv_night)
                             },
@@ -177,7 +176,7 @@ fun HomeScreenContent(
                         WeatherDetailItem(
                             modifier = Modifier.weight(1f),
                             displayMode = displayMode,
-                            painter = when(displayMode){
+                            painter = when (displayMode) {
                                 DisplayMode.Day -> painterResource(R.drawable.icon_arrow_down_05)
                                 DisplayMode.Night -> painterResource(R.drawable.icon_arrow_down_05_night)
                             },
@@ -187,7 +186,7 @@ fun HomeScreenContent(
                         WeatherDetailItem(
                             modifier = Modifier.weight(1f),
                             displayMode = displayMode,
-                            painter = when(displayMode){
+                            painter = when (displayMode) {
                                 DisplayMode.Day -> painterResource(R.drawable.icon_temperature)
                                 DisplayMode.Night -> painterResource(R.drawable.icon_temperature_night)
                             },
