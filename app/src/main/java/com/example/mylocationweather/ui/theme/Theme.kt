@@ -34,7 +34,6 @@ private val LightColorScheme = lightColorScheme(
 )
 
 
-
 @Composable
 fun MyLocationWeatherTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
@@ -60,9 +59,7 @@ fun MyLocationWeatherTheme(
 }
 
 
-
-
-enum class DisplayMode{
+enum class DisplayMode {
     Day,
     Night
 }

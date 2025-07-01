@@ -21,9 +21,14 @@ import java.util.Locale
 
 val DataModule = module {
     single { LocationServices.getFusedLocationProviderClient(androidContext()) }
-    single {  Geocoder(androidContext(), Locale.getDefault()) }
-    single<LocationService> { LocationServiceImpl(fusedLocationProviderClient = get(), geocoder = get()) }
-    single < LocationRepository>{ LocationRepositoryImpl(locationService = get()) }
+    single { Geocoder(androidContext(), Locale.getDefault()) }
+    single<LocationService> {
+        LocationServiceImpl(
+            fusedLocationProviderClient = get(),
+            geocoder = get()
+        )
+    }
+    single<LocationRepository> { LocationRepositoryImpl(locationService = get()) }
 
 
     single {

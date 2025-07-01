@@ -9,15 +9,17 @@ import com.example.mylocationweather.pressentation.utils.getCondition
 import com.example.mylocationweather.ui.theme.DisplayMode
 
 
-fun getHomeUiState(weatherEntity: WeatherEntity): HomeUiState{
+fun getHomeUiState(weatherEntity: WeatherEntity): HomeUiState {
     return HomeUiState(
-        displayMode = when(weatherEntity.isDay){
-            "1"-> {
+        displayMode = when (weatherEntity.isDay) {
+            "1" -> {
                 DisplayMode.Day
             }
-            "0"-> {
+
+            "0" -> {
                 DisplayMode.Night
             }
+
             else -> {
                 DisplayMode.Day
             }
@@ -63,7 +65,7 @@ fun getNextDaysItemUiStateList(
     conditionCodeList: List<Int>,
     highTempList: List<String>,
     lowTempList: List<String>
-): List<NextDaysItemUiState>{
+): List<NextDaysItemUiState> {
     return conditionCodeList.mapIndexed { index, code ->
         NextDaysItemUiState(
             dayName = dayNames[index],
@@ -73,7 +75,6 @@ fun getNextDaysItemUiStateList(
         )
     }
 }
-
 
 
 fun getTodayItemUiStateList(

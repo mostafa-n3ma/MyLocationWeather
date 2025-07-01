@@ -10,7 +10,7 @@ import io.ktor.client.request.parameter
 
 class WeatherRemoteDataSource(
     private val client: HttpClient
-): RemoteDataSource {
+) : RemoteDataSource {
 
     override suspend fun getCurrentLocationWeatherInfo(location: LocationInfo): WeatherDto {
         return client.get(BASE_URL) {
@@ -31,7 +31,7 @@ class WeatherRemoteDataSource(
     }
 
 
-    companion object{
+    companion object {
         private const val BASE_URL = "https://api.open-meteo.com/v1/forecast"
     }
 }

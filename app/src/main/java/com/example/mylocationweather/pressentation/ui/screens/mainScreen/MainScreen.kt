@@ -24,14 +24,19 @@ fun HomeScreen(
             Log.d("loading test", " isLoading -> isLoading:$isLoading,homeUiState:$homeUiState")
             LoadingScreen(modifier)
         }
+
         homeUiState != null -> {
-            Log.d("loading test", " homeUiState != null ->isLoading:$isLoading,homeUiState:$homeUiState")
+            Log.d(
+                "loading test",
+                " homeUiState != null ->isLoading:$isLoading,homeUiState:$homeUiState"
+            )
             HomeScreenContent(
-                innerPadding=innerPadding,
+                innerPadding = innerPadding,
                 modifier = modifier,
                 homeUiState = homeUiState!!
             )
         }
+
         else -> {
             Log.d("loading test", " else-> isLoading:$isLoading,homeUiState:$homeUiState")
             ErrorScreen(

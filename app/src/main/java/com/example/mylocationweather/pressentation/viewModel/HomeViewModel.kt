@@ -21,7 +21,7 @@ class HomeViewModel(
     private val _isLoading = MutableStateFlow(false)
     val isLoading = _isLoading.asStateFlow()
 
-//    private val _currentLocation: MutableStateFlow<LocationInfo?> = MutableStateFlow(null)
+    //    private val _currentLocation: MutableStateFlow<LocationInfo?> = MutableStateFlow(null)
     private val _currentWeatherInfo: MutableStateFlow<WeatherEntity?> = MutableStateFlow(null)
 
     private val _homeUiState: MutableStateFlow<HomeUiState?> = MutableStateFlow(null)
@@ -43,12 +43,12 @@ class HomeViewModel(
 //        }
 //    }
 
-     fun getCurrentWeather() {
+    fun getCurrentWeather() {
         viewModelScope.launch {
             _isLoading.value = true
             try {
-                _currentWeatherInfo.update {  getWeatherUseCase.getWeatherInfo()}
-                    updateUiState( _currentWeatherInfo.value!!)
+                _currentWeatherInfo.update { getWeatherUseCase.getWeatherInfo() }
+                updateUiState(_currentWeatherInfo.value!!)
                 Log.d(TAG, "getCurrentWeather: isDay:${_currentWeatherInfo.value!!.isDay}")
 
             } catch (e: Exception) {
@@ -59,7 +59,7 @@ class HomeViewModel(
         }
     }
 
-    private fun updateUiState( weatherEntity: WeatherEntity) {
+    private fun updateUiState(weatherEntity: WeatherEntity) {
         viewModelScope.launch {
             try {
                 _homeUiState.update {

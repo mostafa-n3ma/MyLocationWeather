@@ -12,8 +12,6 @@ val PurpleGrey40 = Color(0xFF625b71)
 val Pink40 = Color(0xFF7D5260)
 
 
-
-
 val MainBackgroundDay1 = Color(0xFF87CEFA)
 val MainBackgroundDay2 = Color(0xFFFFFFFF)
 val MainBackgroundDayLinearGradient = Brush.verticalGradient(
@@ -32,10 +30,8 @@ val MainBackgroundNightLinearGradient = Brush.verticalGradient(
 )
 
 
-
 val CityTextDayColor = Color(0xFF323232)
 val CityTextNightColor = Color(0xFFFFFFFF)
-
 
 
 //AnimatedHeader
@@ -78,9 +74,6 @@ val HourlyItemMainTextNightColor = Color(0xDEFFFFFF)
 
 val HourlyItemSubTextDayColor = Color(0x99060414)
 val HourlyItemSubTextNightColor = Color(0x99FFFFFF)
-
-
-
 
 
 val DailyItemDayText = Color(0x99060414)

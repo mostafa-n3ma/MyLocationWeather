@@ -6,7 +6,7 @@ import com.example.mylocationweather.domain.service.LocationService
 
 class LocationRepositoryImpl(
     private val locationService: LocationService
-): LocationRepository {
+) : LocationRepository {
     override suspend fun getCurrentLocation(): LocationInfo {
         return locationService.getCurrentLocation()
     }

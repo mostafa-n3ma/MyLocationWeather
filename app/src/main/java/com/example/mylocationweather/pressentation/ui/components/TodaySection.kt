@@ -82,15 +82,21 @@ fun TodaySection(
         LazyRow(
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            items (todayStateList){todayItemState->
-                val dailyDisplayMode = when(todayItemState.isDay){
+            items(todayStateList) { todayItemState ->
+                val dailyDisplayMode = when (todayItemState.isDay) {
                     1 -> DisplayMode.Day
                     0 -> DisplayMode.Night
                     else -> DisplayMode.Day
                 }
                 HourlyItem(
                     displayMode = displayMode,
-                    painter = painterResource(getConditionResourceId(condition = getCondition(todayItemState.conditionCode),displayMode = dailyDisplayMode)),
+                    painter = painterResource(
+                        getConditionResourceId(
+                            condition = getCondition(
+                                todayItemState.conditionCode
+                            ), displayMode = dailyDisplayMode
+                        )
+                    ),
                     temp = todayItemState.temp,
                     hour = todayItemState.hour,
                     tempUnit = tempUnit
@@ -192,7 +198,7 @@ fun HourlyItem(
                 )
                 .padding(bottom = 16.dp),
         ) {
-            if (displayMode == DisplayMode.Day){
+            if (displayMode == DisplayMode.Day) {
                 Box(
                     modifier = Modifier
                         .align(Alignment.Center)
@@ -202,9 +208,7 @@ fun HourlyItem(
                             color = Color(0xFF050000),
                             blur = 70.dp,
                             spread = 1.dp
-                        )
-
-                    ,
+                        ),
                 )
             }
 

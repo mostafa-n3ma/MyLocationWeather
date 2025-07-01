@@ -10,10 +10,10 @@ import com.example.mylocationweather.domain.service.RemoteDataSource
 
 class WeatherRepositoryImpl(
     private val remoteDataSource: RemoteDataSource
-): WeatherRepository {
+) : WeatherRepository {
     @RequiresApi(Build.VERSION_CODES.O)
     override suspend fun getCurrentLocationWeatherInfo(location: LocationInfo): WeatherEntity {
-        val currentWeatherDto =  remoteDataSource.getCurrentLocationWeatherInfo(location)
+        val currentWeatherDto = remoteDataSource.getCurrentLocationWeatherInfo(location)
         return currentWeatherDto.mapToEntity().copy(cityName = location.cityName)
     }
 }

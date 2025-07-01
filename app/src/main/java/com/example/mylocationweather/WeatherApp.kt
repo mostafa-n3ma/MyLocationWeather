@@ -7,7 +7,7 @@ import com.example.mylocationweather.di.PresentationModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
-class WeatherApp: Application() {
+class WeatherApp : Application() {
     override fun onCreate() {
         super.onCreate()
         startKoin {

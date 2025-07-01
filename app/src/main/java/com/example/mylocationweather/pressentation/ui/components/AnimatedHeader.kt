@@ -59,9 +59,6 @@ import com.example.mylocationweather.ui.theme.UrbanistFont
 import kotlinx.coroutines.delay
 
 
-
-
-
 data class AnimatedHeaderUiState(
     val weatherCondition: WeatherCondition,
     val temp: String,
@@ -69,7 +66,6 @@ data class AnimatedHeaderUiState(
     val lowTemp: String, //dailyTemperaturesMinm
     val tempUnit: String
 )
-
 
 
 @Composable
@@ -82,13 +78,12 @@ fun AnimatedHeader(
     val size: Pair<Int, Int> = GetScreenSizeDp()
 
 
-
     val boxHeight = lerp(143.dp, 355.dp, progress)
     val imageWidth = lerp(124.dp, 227.dp, progress)
     val imageHeight = lerp(112.dp, 200.dp, progress)
-    val imageXOffset = lerp(0.dp, (size.first/6).dp, progress)
+    val imageXOffset = lerp(0.dp, (size.first / 6).dp, progress)
     val imageYOffset = lerp(5.dp, 0.dp, progress)
-    val infoXOffset = lerp((size.first / 2.1).dp, (size.first/4).dp, progress)
+    val infoXOffset = lerp((size.first / 2.1).dp, (size.first / 4).dp, progress)
     val infoYOffset = lerp(5.dp, 207.dp, progress)
 
 
@@ -304,7 +299,7 @@ fun TempInfoRang(
             ) {
                 Image(
                     modifier = Modifier.size(12.dp),
-                    painter = when(displayMode){
+                    painter = when (displayMode) {
                         DisplayMode.Day -> painterResource(R.drawable.icon_arrow_up)
                         DisplayMode.Night -> painterResource(R.drawable.icon_arrow_up_night)
                     },
@@ -348,7 +343,7 @@ fun TempInfoRang(
             ) {
                 Image(
                     modifier = Modifier.size(12.dp),
-                    painter = when(displayMode){
+                    painter = when (displayMode) {
                         DisplayMode.Day -> painterResource(R.drawable.icon_arrow_down)
                         DisplayMode.Night -> painterResource(R.drawable.icon_arrow_down_night)
                     },

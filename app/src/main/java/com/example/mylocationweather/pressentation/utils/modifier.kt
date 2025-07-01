@@ -49,7 +49,6 @@ fun Modifier.dropShadow(
 }
 
 
-
 fun lerp(start: Dp, end: Dp, fraction: Float): Dp {
     return start + (end - start) * fraction
 }
