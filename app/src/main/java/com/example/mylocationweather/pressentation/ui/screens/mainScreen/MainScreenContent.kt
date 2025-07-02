@@ -107,7 +107,7 @@ fun HomeScreenContent(
             item {
                 CitNameComponent(
                     displayMode = displayMode,
-                    cityName = homeUiState.cityName
+                    cityName = homeUiState.city
                 )
                 Spacer(Modifier.height(12.dp))
             }

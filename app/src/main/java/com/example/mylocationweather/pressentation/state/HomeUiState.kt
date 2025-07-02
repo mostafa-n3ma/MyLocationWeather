@@ -6,7 +6,7 @@ import com.example.mylocationweather.pressentation.ui.components.TodayItemUiStat
 import com.example.mylocationweather.ui.theme.DisplayMode
 
 data class HomeUiState(
-    val cityName: String,
+    val city: String,
     val headerUiState: AnimatedHeaderUiState,
     val units: unitsState,
     val windSpeed: String,

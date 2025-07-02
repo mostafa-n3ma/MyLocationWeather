@@ -1,6 +1,5 @@
 package com.example.mylocationweather.pressentation.state
 
-import com.example.mylocationweather.data.remote.model.LocationInfo
 import com.example.mylocationweather.domain.model.WeatherEntity
 import com.example.mylocationweather.pressentation.ui.components.AnimatedHeaderUiState
 import com.example.mylocationweather.pressentation.ui.components.NextDaysItemUiState
@@ -24,7 +23,7 @@ fun getHomeUiState(weatherEntity: WeatherEntity): HomeUiState {
                 DisplayMode.Day
             }
         },
-        cityName = weatherEntity.cityName,
+        city = weatherEntity.cityName,
         headerUiState = AnimatedHeaderUiState(
             weatherCondition = getCondition(weatherEntity.currentWeatherCode),
             temp = weatherEntity.currentTemperature.toString(),
